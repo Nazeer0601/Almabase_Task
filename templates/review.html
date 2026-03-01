@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Review Answers</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<h2>Coverage Summary</h2>
+<p>Total Questions: {{ coverage.total }}</p>
+<p>Answered: {{ coverage.answered }}</p>
+<p>Missing: {{ coverage.missing }}</p>
+
+<form method="POST" action="/export">
+
+{% for r in results %}
+
+<h3>{{ r.question }}</h3>
+
+<textarea name="answer{{ loop.index }}" rows="4" cols="80">
+{{ r.answer }}
+</textarea>
+
+<p><b>Citation:</b> {{ r.citation }}</p>
+<p><b>Confidence:</b> {{ r.confidence }}</p>
+
+<p><b>Evidence Used:</b></p>
+<ul>
+{% for e in r.evidence %}
+<li>{{ e }}</li>
+{% endfor %}
+</ul>
+
+<hr>
+
+{% endfor %}
+
+<button>Export Document</button>
+
+</form>
+
+</body>
+</html>

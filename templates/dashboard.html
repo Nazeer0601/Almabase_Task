@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<h1>AI Questionnaire Tool</h1>
+
+<h3>Upload Questionnaire</h3>
+<form method="POST" action="/upload_questionnaire" enctype="multipart/form-data">
+<input type="file" name="file" required>
+<button>Upload</button>
+</form>
+
+<h3>Upload Reference Document</h3>
+<form method="POST" action="/upload_reference" enctype="multipart/form-data">
+<input type="file" name="file" required>
+<button>Upload</button>
+</form>
+
+<br>
+<a href="/generate_ui">
+<button>Generate Answers</button>
+</a>
+
+</body>
+</html>

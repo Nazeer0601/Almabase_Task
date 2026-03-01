@@ -1,0 +1,10 @@
+flask
+flask-login
+flask-sqlalchemy
+sentence-transformers
+faiss-cpu
+pypdf
+python-docx
+openai
+werkzeug
+gunicorn
