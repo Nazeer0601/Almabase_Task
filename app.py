@@ -26,7 +26,7 @@ generated_results = []
 
 # ---------- AUTH ----------
 
-@app.route("/signup", methods=["GET","POST"])
+@app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
         username = request.form["username"]
@@ -41,7 +41,7 @@ def signup():
     return render_template("signup.html")
 
 
-@app.route("/login", methods=["GET","POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         username = request.form["username"]
@@ -67,14 +67,11 @@ def dashboard():
 
 @app.route("/upload_questionnaire", methods=["POST"])
 def upload_questionnaire():
-
     file = request.files["file"]
 
-    # check file uploaded
     if not file or file.filename == "":
         return "No file uploaded"
 
-    # allow only PDF
     if not file.filename.lower().endswith(".pdf"):
         return "Only PDF files are allowed"
 
@@ -92,7 +89,6 @@ def upload_questionnaire():
 
 @app.route("/upload_reference", methods=["POST"])
 def upload_reference():
-
     file = request.files["file"]
 
     if not file or file.filename == "":
@@ -104,7 +100,6 @@ def upload_reference():
     path = os.path.join("uploads", file.filename)
     file.save(path)
 
-    # safe PDF reading
     try:
         reader = PdfReader(path)
         text = ""
@@ -142,7 +137,6 @@ def generate_ui():
         return "Upload questionnaire first"
 
     file_path = os.path.join("uploads", q_doc.filename)
-
     questions = extract_questions(file_path)
 
     if not questions:
@@ -193,5 +187,8 @@ def home():
     return redirect("/login")
 
 
+# ---------- RUN APP (IMPORTANT FOR RENDER) ----------
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
